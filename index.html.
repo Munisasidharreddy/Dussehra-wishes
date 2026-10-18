@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Dussehra</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  text-align: center;
+  color: #fff5d5;
+  background: linear-gradient(145deg, #5b0000, #a71919, #310000);
+  overflow-x: hidden;
+}
+
+header {
+  padding: 35px 15px;
+  border-bottom: 3px solid #ffd76b;
+}
+
+h1 {
+  color: #ffd76b;
+  font-size: clamp(32px, 7vw, 58px);
+  text-shadow: 0 0 18px #ff9f00;
+}
+
+h2 { color: #ffe3a0; }
+
+.card {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 22px;
+  width: 92%;
+  border: 2px solid #ffd76b;
+  border-radius: 20px;
+  background: #650909aa;
+  box-shadow: 0 0 25px #ffb52e44;
+}
+
+img, video {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: 14px;
+  margin-top: 12px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+button {
+  background: linear-gradient(90deg, #ffd76b, #fff0b0);
+  color: #710000;
+  border: 0;
+  padding: 13px 22px;
+  margin: 8px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { transform: scale(1.04); }
+
+.diya {
+  display: inline-block;
+  font-size: 34px;
+  margin: 10px;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: brightness(.8); transform: scale(.95); }
+  to { filter: brightness(1.5); transform: scale(1.08); }
+}
+
+.petal {
+  position: fixed;
+  top: -30px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(650deg); }
+}
+
+footer {
+  padding: 25px;
+  color: #ffdf91;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="diya">🪔</div>
+  <h1>✨ Happy Dussehra ✨</h1>
+  <h2>A Festival of Victory of Good over Evil</h2>
+  <p>May goodness, happiness and peace shine in every heart.</p>
+</header>
+
+<section class="card">
+  <h2>🙏 Divine Blessings 🙏</h2>
+
+  <!-- Replace these filenames with your photo filenames -->
+  <img src="rama.jpg" alt="Lord Rama"
+       onerror="this.style.display='none'">
+
+  <img src="durga.jpg" alt="Goddess Durga"
+       onerror="this.style.display='none'">
+
+  <p>
+    May Lord Rama guide us towards truth and righteousness,
+    and may Goddess Durga bless everyone with strength,
+    courage, prosperity and happiness.
+  </p>
+</section>
+
+<section class="card">
+  <h2>🎬 Dussehra Special Video</h2>
+
+  <!-- Replace dussehra.mp4 with your video filename -->
+  <video controls playsinline preload="metadata">
+    <source src="dussehra.mp4" type="video/mp4">
+    Your browser cannot play this video.
+  </video>
+
+  <p>Celebrate this beautiful festival with devotion and joy!</p>
+</section>
+
+<section class="card">
+  <h2>🌺 My Wishes to Everyone 🌺</h2>
+
+  <p>
+    May this Dussehra bring new hopes, beautiful beginnings,
+    success and endless happiness into your life.
+    May the light of goodness always shine in your home.
+  </p>
+
+  <h2>Wishing You and Your Family a Very Happy Dussehra!</h2>
+
+  <div class="diya">🪔</div>
+  <div class="diya">🪔</div>
+  <div class="diya">🪔</div>
+</section>
+
+<section class="card">
+  <h2>🎵 Devotional Music</h2>
+
+  <p>Tap below to play your devotional audio.</p>
+
+  <!-- Upload your audio file and replace the filename -->
+  <audio id="music" loop>
+    <source src="devotional.mp3" type="audio/mpeg">
+  </audio>
+
+  <button onclick="toggleMusic()" id="musicBtn">
+    ▶ Play Devotional Music
+  </button>
+
+  <script>
+  function toggleMusic() {
+    const music = document.getElementById("music");
+    const btn = document.getElementById("musicBtn");
+
+    if (music.paused) {
+      music.play().then(() => {
+        btn.textContent = "⏸ Pause Music";
+      }).catch(() => {
+        alert("Please upload your devotional.mp3 file to GitHub.");
+      });
+    } else {
+      music.pause();
+      btn.textContent = "▶ Play Devotional Music";
+    }
+  }
+  </script>
+</section>
+
+<button onclick="shareGreeting()">💌 Share Dussehra Wishes</button>
+
+<script>
+function shareGreeting() {
+  const message =
+    "✨ Happy Dussehra! 🌺 May goodness, peace and happiness fill your life. Wishing you and your family a blessed Vijayadashami! 🪔";
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Happy Dussehra",
+      text: message,
+      url: window.location.href
+    }).catch(() => {});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(
+      message + "\n" + window.location.href
+    ).then(() => alert("Greeting and website link copied!"));
+  } else {
+    prompt("Copy your greeting and website link:", 
+      message + "\n" + window.location.href);
+  }
+}
+
+function makePetal() {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.textContent = Math.random() > 0.5 ? "🌼" : "🌸";
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.fontSize = (14 + Math.random() * 16) + "px";
+  petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+  document.body.appendChild(petal);
+  setTimeout(() => petal.remove(), 11000);
+}
+
+setInterval(makePetal, 600);
+</script>
+
+<footer>
+  Made with love, devotion and festive wishes ❤️
+  <br>Happy Vijayadashami!
+</footer>
+
+</body>
+</html>
